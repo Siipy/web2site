@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Alcoy | Visual Storyteller</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="particles-background"></div>
+    
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+        <div class="nav-logo">DYLAN ALCOY</div>
+        <ul class="nav-links">
+            <li><a href="#home" class="nav-link active">Home</a></li>
+            <li><a href="#gallery" class="nav-link">Gallery</a></li>
+            <li><a href="#drone" class="nav-link">Drone</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-social">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title" data-speed="0.8">DYLAN ALCOY</h1>
+            <p class="hero-subtitle" data-speed="0.6">PHOTOGRAPHER • FILMMAKER • DRONE PILOT</p>
+            <div class="scroll-indicator" data-speed="0.4">
+                <span></span>
+            </div>
+        </div>
+        <div class="hero-image" data-speed="0.2">
+            <img src="https://i.imgur.com/ZqKsBuC.jpeg" alt="Dylan Alcoy">
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="section-header">
+            <h2>Featured Work</h2>
+            <div class="filter-tabs">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="photo">Photography</button>
+                <button class="filter-btn" data-filter="video">Videography</button>
+            </div>
+        </div>
+        
+        <div class="gallery-grid">
+            <!-- Items will be added dynamically via JS -->
+        </div>
+    </section>
+
+    <!-- Drone Showcase -->
+    <section id="drone" class="drone-section">
+        <div class="drone-video">
+            <video autoplay loop muted playsinline>
+                <source src="https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4" type="video/mp4">
+            </video>
+            <div class="drone-overlay">
+                <h2 data-speed="0.7">AERIAL PERSPECTIVES</h2>
+                <p data-speed="0.5">Elevating visual storytelling through drone cinematography</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <h2>Let's Create Together</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Name" required>
+                <span class="focus-border"></span>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email" required>
+                <span class="focus-border"></span>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Project Details" required></textarea>
+                <span class="focus-border"></span>
+            </div>
+            <button type="submit" class="submit-btn">
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </form>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="close-btn">&times;</span>
+            <img src="" alt="" class="lightbox-img">
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Video Hover Player -->
+    <div class="video-hover-player">
+        <video muted loop class="hover-video"></video>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
