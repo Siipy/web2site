@@ -6,10 +6,95 @@ let hoverTimeout;
 // WARNING: exposing the webhook in client-side code allows anyone to use it.
 const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1444689979015168050/_2Gvzu5AhHNxOJmnGqySUsW_CYm5x0SshnHOUvJmxl1XRpD1YZbFb-U5ocTZTp2bCCjl';
 
+// Internationalization
+const translations = {
+    en: {
+        'nav.home': 'Home',
+        'nav.gallery': 'Gallery',
+        'nav.drone': 'Drone',
+        'nav.contact': 'Contact',
+        'hero.subtitle': 'PHOTOGRAPHER • FILMMAKER • DRONE PILOT',
+        'gallery.title': 'Featured Work',
+        'gallery.all': 'All',
+        'gallery.photo': 'Photography',
+        'gallery.video': 'Videography',
+        'drone.title': 'AERIAL PERSPECTIVES',
+        'drone.subtitle': 'Elevating visual storytelling through drone cinematography',
+        'contact.heading': 'Questions?',
+        'contact.name': 'Name',
+        'contact.email': 'Email',
+        'contact.message': 'Your Project Details',
+        'contact.submit': 'Send Message'
+    },
+    fr: {
+        'nav.home': 'Accueil',
+        'nav.gallery': 'Galerie',
+        'nav.drone': 'Drone',
+        'nav.contact': 'Contact',
+        'hero.subtitle': 'PHOTOGRAPHE • CINÉASTE • PILOTE DE DRONE',
+        'gallery.title': 'Œuvres Récentes',
+        'gallery.all': 'Tous',
+        'gallery.photo': 'Photographie',
+        'gallery.video': 'Vidéographie',
+        'drone.title': 'PERSPECTIVES AÉRIENNES',
+        'drone.subtitle': 'Élevez la narration visuelle grâce à la cinématographie par drone',
+        'contact.heading': 'Besoin de plus d\'info ?',
+        'contact.name': 'Nom',
+        'contact.email': 'Email',
+        'contact.message': 'Détails du Projet',
+        'contact.submit': 'Envoyer le Message'
+    }
+};
+
+let currentLanguage = localStorage.getItem('language') || 'en';
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+
+    // Update text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang][key]) {
+            el.placeholder = translations[lang][key];
+        }
+    });
+
+    // Update language toggle button text
+    const toggle = document.querySelector('#lang-toggle');
+    if (toggle) {
+        toggle.textContent = lang === 'en' ? 'EN / FR' : 'EN / FR';
+    }
+
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
+}
+
+function initLanguageToggle() {
+    const toggle = document.querySelector('#lang-toggle');
+    if (toggle) {
+        toggle.addEventListener('click', () => {
+            const newLang = currentLanguage === 'en' ? 'fr' : 'en';
+            setLanguage(newLang);
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize video player elements after DOM is ready
     hoverPlayer = document.querySelector('.hover-video');
     hoverPlayerContainer = document.querySelector('.video-hover-player');
+    
+    // Set initial language
+    setLanguage(currentLanguage);
     
     // Initialize all components
     initNav();
@@ -19,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initParallax();
     initContactForm();
+    initLanguageToggle();
 });
 
 // Navigation
@@ -341,13 +427,13 @@ function initContactForm() {
                 setTimeout(() => {
                     contactForm.reset();
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+                    submitBtn.innerHTML = '<span data-i18n="contact.submit">Send Message</span><i class="fas fa-paper-plane"></i>';
                 }, 1800);
             } else {
                 submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Send Failed';
                 setTimeout(() => {
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+                    submitBtn.innerHTML = '<span data-i18n="contact.submit">Send Message</span><i class="fas fa-paper-plane"></i>';
                 }, 2500);
             }
         });

@@ -87,6 +87,7 @@ body {
 .nav-social {
     display: flex;
     gap: 1rem;
+    align-items: center;
 }
 
 .nav-social a {
@@ -95,6 +96,24 @@ body {
 }
 
 .nav-social a:hover {
+    color: var(--primary);
+}
+
+.lang-toggle {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--light);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+
+.lang-toggle:hover {
+    border-color: var(--primary);
     color: var(--primary);
 }
 

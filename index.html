@@ -16,14 +16,15 @@
     <nav class="floating-nav">
         <div class="nav-logo">@dylanalcoy</div>
         <ul class="nav-links">
-            <li><a href="#home" class="nav-link active">Home</a></li>
-            <li><a href="#gallery" class="nav-link">Gallery</a></li>
-            <li><a href="#drone" class="nav-link">Drone</a></li>
-            <li><a href="#contact" class="nav-link">Contact</a></li>
+            <li><a href="#home" class="nav-link active" data-i18n="nav.home">Home</a></li>
+            <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Gallery</a></li>
+            <li><a href="#drone" class="nav-link" data-i18n="nav.drone">Drone</a></li>
+            <li><a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a></li>
         </ul>
         <div class="nav-social">
             <a href="#"><i class="fab fa-instagram"></i></a>
             <a href="#"><i class="fab fa-youtube"></i></a>
+            <button id="lang-toggle" class="lang-toggle" title="Toggle language">EN / FR</button>
         </div>
     </nav>
 
@@ -31,7 +32,7 @@
     <section id="home" class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title" data-speed="0.8">DYLAN ALCOY</h1>
-            <p class="hero-subtitle" data-speed="0.6">PHOTOGRAPHER • FILMMAKER • DRONE PILOT</p>
+            <p class="hero-subtitle" data-speed="0.6" data-i18n="hero.subtitle">PHOTOGRAPHER • FILMMAKER • DRONE PILOT</p>
             <div class="scroll-indicator" data-speed="0.4">
                 <span></span>
             </div>
@@ -44,11 +45,11 @@
     <!-- Gallery Section -->
     <section id="gallery" class="gallery-section">
         <div class="section-header">
-            <h2>Featured Work</h2>
+            <h2 data-i18n="gallery.title">Featured Work</h2>
             <div class="filter-tabs">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="photo">Photography</button>
-                <button class="filter-btn" data-filter="video">Videography</button>
+                <button class="filter-btn active" data-filter="all" data-i18n="gallery.all">All</button>
+                <button class="filter-btn" data-filter="photo" data-i18n="gallery.photo">Photography</button>
+                <button class="filter-btn" data-filter="video" data-i18n="gallery.video">Videography</button>
             </div>
         </div>
         
@@ -64,30 +65,30 @@
                 <source src="https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4" type="video/mp4">
             </video>
             <div class="drone-overlay">
-                <h2 data-speed="0.7">AERIAL PERSPECTIVES</h2>
-                <p data-speed="0.5">Elevating visual storytelling through drone cinematography</p>
+                <h2 data-speed="0.7" data-i18n="drone.title">AERIAL PERSPECTIVES</h2>
+                <p data-speed="0.5" data-i18n="drone.subtitle">Elevating visual storytelling through drone cinematography</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
-        <h2>Questions?</h2>
+        <h2 data-i18n="contact.heading">Questions?</h2>
         <form class="contact-form" id="contactForm">
             <div class="form-group">
-                <input type="text" name="name" id="contact-name" placeholder="Name" required>
+                <input type="text" name="name" id="contact-name" placeholder="Name" data-i18n-placeholder="contact.name" required>
                 <span class="focus-border"></span>
             </div>
             <div class="form-group">
-                <input type="email" name="email" id="contact-email" placeholder="Email" required>
+                <input type="email" name="email" id="contact-email" placeholder="Email" data-i18n-placeholder="contact.email" required>
                 <span class="focus-border"></span>
             </div>
             <div class="form-group">
-                <textarea name="message" id="contact-message" placeholder="Your Project Details" required></textarea>
+                <textarea name="message" id="contact-message" placeholder="Your Project Details" data-i18n-placeholder="contact.message" required></textarea>
                 <span class="focus-border"></span>
             </div>
             <button type="submit" class="submit-btn" id="contact-submit">
-                <span>Send Message</span>
+                <span data-i18n="contact.submit">Send Message</span>
                 <i class="fas fa-paper-plane"></i>
             </button>
         </form>
