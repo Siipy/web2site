@@ -2,6 +2,9 @@
 let hoverPlayer;
 let hoverPlayerContainer;
 let hoverTimeout;
+// If you want to send directly from the browser, put your webhook here.
+// WARNING: exposing the webhook in client-side code allows anyone to use it.
+const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1444689979015168050/_2Gvzu5AhHNxOJmnGqySUsW_CYm5x0SshnHOUvJmxl1XRpD1YZbFb-U5ocTZTp2bCCjl';
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize video player elements after DOM is ready
@@ -268,23 +271,85 @@ function initParallax() {
 
 // Contact Form
 function initContactForm() {
-    const contactForm = document.querySelector('.contact-form');
-    
+    const contactForm = document.querySelector('#contactForm');
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
-            const submitBtn = this.querySelector('.submit-btn');
+
+            const submitBtn = document.querySelector('#contact-submit');
+            const name = document.querySelector('#contact-name').value.trim();
+            const email = document.querySelector('#contact-email').value.trim();
+            const message = document.querySelector('#contact-message').value.trim();
+
+            if (!name || !email || !message) return;
+
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            
-            setTimeout(() => {
+            submitBtn.disabled = true;
+
+            // Build Discord embed
+            const safeMessage = message.length > 1900 ? message.slice(0, 1897) + '...' : message;
+            const embed = {
+                title: 'New contact form submission',
+                fields: [
+                    { name: 'Name', value: name, inline: true },
+                    { name: 'Email', value: email, inline: true },
+                    { name: 'Message', value: safeMessage, inline: false }
+                ],
+                timestamp: new Date().toISOString()
+            };
+
+            const body = JSON.stringify({ embeds: [embed] });
+
+            // Try a normal fetch first (preferred). If blocked by CORS, fallback to no-cors.
+            let sent = false;
+            try {
+                const res = await fetch(DISCORD_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body
+                });
+
+                if (res && res.ok) {
+                    sent = true;
+                } else {
+                    // Non-OK status; attempt no-cors fallback
+                    console.warn('Discord webhook POST returned non-ok, status:', res && res.status);
+                }
+            } catch (err) {
+                // Likely a CORS error — fallback to no-cors attempt below
+                console.warn('Fetch to webhook failed (possible CORS). Trying no-cors fallback.', err);
+            }
+
+            if (!sent) {
+                // Fallback: try sending with mode:'no-cors'. This sends an opaque request
+                // and we can't check the status — treat as best-effort.
+                try {
+                    await fetch(DISCORD_WEBHOOK_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body
+                    });
+                    sent = true; // optimistic
+                } catch (err2) {
+                    console.error('No-cors fallback failed:', err2);
+                }
+            }
+
+            if (sent) {
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                
                 setTimeout(() => {
-                    this.reset();
+                    contactForm.reset();
+                    submitBtn.disabled = false;
                     submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
-                }, 2000);
-            }, 1500);
+                }, 1800);
+            } else {
+                submitBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Send Failed';
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<span>Send Message</span><i class="fas fa-paper-plane"></i>';
+                }, 2500);
+            }
         });
     }
 }
