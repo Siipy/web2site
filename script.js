@@ -1,4 +1,13 @@
+// Video Hover Player Variables
+let hoverPlayer;
+let hoverPlayerContainer;
+let hoverTimeout;
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize video player elements after DOM is ready
+    hoverPlayer = document.querySelector('.hover-video');
+    hoverPlayerContainer = document.querySelector('.video-hover-player');
+    
     // Initialize all components
     initNav();
     initHero();
@@ -8,11 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initParallax();
     initContactForm();
 });
-
-// Video Hover Player Variables
-const hoverPlayer = document.querySelector('.hover-video');
-const hoverPlayerContainer = document.querySelector('.video-hover-player');
-let hoverTimeout;
 
 // Navigation
 function initNav() {
@@ -76,35 +80,36 @@ function initGallery() {
             type: 'image'
         },
         { 
-            src: 'images/photo2.jpg', 
-            category: 'photo', 
-            caption: 'Urban Portrait - 2023',
-            type: 'image'
-        },
-        { 
-            src: 'images/video1.jpg', 
+            src: 'https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4', 
             category: 'video', 
-            caption: 'Commercial Shoot - 2023',
+            caption: 'Chalk Horse',
+            type: 'video',
+            thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
+        },
+        { 
+            src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0317.png', 
+            category: 'image', 
+            caption: 'Temple',
             type: 'image'
         },
         { 
-            src: 'images/drone1.jpg', 
-            category: 'drone', 
-            caption: 'Aerial View - 2023',
-            type: 'image'
-        },
-        { 
-            src: 'images/photo3.jpg', 
+            src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0311.png', 
             category: 'photo', 
-            caption: 'Wedding Photography - 2023',
+            caption: 'Temple',
+            type: 'image'
+        },
+        { 
+            src: 'https://archive.org/download/wb2-0296/DJI_0296.png', 
+            category: 'photo', 
+            caption: 'Temple',
             type: 'image'
         },
         { 
             src: 'https://ia601205.us.archive.org/13/items/0505_20250505_20250505/0505.mp4', 
             category: 'video', 
-            caption: 'Music Video - 2023',
+            caption: 'Temple',
             type: 'video',
-            thumbnail: 'images/video-thumbnail.jpg'
+            thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
         }
     ];
     
@@ -122,29 +127,41 @@ function initGallery() {
                 galleryItem.innerHTML = `
                     <div class="video-thumbnail">
                         <img src="${item.thumbnail}" alt="${item.caption}">
-                        <div class="play-icon"><i class="fas fa-play"></i></div>
+                        <div class="video-hover-player">
+                            <video muted loop class="hover-video"></video>
+                        </div>
+                        <div class="video-overlay">
+                            <div class="overlay-label">Hover to play</div>
+                            <div class="overlay-caption">${item.caption}</div>
+                        </div>
                     </div>
                 `;
-                
+
+                const videoContainer = galleryItem.querySelector('.video-hover-player');
+                const videoElement = galleryItem.querySelector('.hover-video');
+                const overlay = galleryItem.querySelector('.video-overlay');
+
                 // Hover effects for videos
                 galleryItem.addEventListener('mouseenter', () => {
                     clearTimeout(hoverTimeout);
                     hoverTimeout = setTimeout(() => {
-                        hoverPlayer.src = item.src;
-                        hoverPlayerContainer.style.left = `${galleryItem.getBoundingClientRect().left}px`;
-                        hoverPlayerContainer.style.top = `${galleryItem.getBoundingClientRect().top}px`;
-                        hoverPlayerContainer.classList.add('visible');
-                        hoverPlayer.play().catch(e => console.log("Autoplay prevented:", e));
+                        // set src then show video and hide overlay
+                        videoElement.src = item.src;
+                        overlay.classList.add('hidden');
+                        videoContainer.classList.add('visible');
+                        videoElement.play().catch(e => console.log("Autoplay prevented:", e));
                     }, 300);
                 });
-                
+
                 galleryItem.addEventListener('mouseleave', () => {
                     clearTimeout(hoverTimeout);
-                    hoverPlayerContainer.classList.remove('visible');
-                    hoverPlayer.pause();
-                    hoverPlayer.currentTime = 0;
+                    videoContainer.classList.remove('visible');
+                    videoElement.pause();
+                    videoElement.currentTime = 0;
+                    // restore overlay after short delay for smoother UX
+                    setTimeout(() => overlay.classList.remove('hidden'), 150);
                 });
-                
+
                 galleryItem.addEventListener('click', () => {
                     clearTimeout(hoverTimeout);
                     window.open(item.src, '_blank');
@@ -176,14 +193,6 @@ function initGallery() {
     
     // Initial render
     renderGallery(galleryItems);
-    
-    // Mouse movement handler
-    document.addEventListener('mousemove', (e) => {
-        if (hoverPlayerContainer.classList.contains('visible')) {
-            hoverPlayerContainer.style.left = `${e.clientX + 20}px`;
-            hoverPlayerContainer.style.top = `${e.clientY + 20}px`;
-        }
-    });
 }
 
 // Lightbox
