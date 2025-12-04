@@ -32,7 +32,7 @@ const translations = {
         'nav.drone': 'Drone',
         'nav.contact': 'Contact',
         'hero.subtitle': 'PHOTOGRAPHE • CINÉASTE • PILOTE DE DRONE',
-        'gallery.title': 'Œuvres Récentes',
+        'gallery.title': 'Travaux récents',
         'gallery.all': 'Tous',
         'gallery.photo': 'Photographie',
         'gallery.video': 'Vidéographie',
@@ -182,15 +182,15 @@ function initGallery() {
             type: 'image'
         },
         { 
-            src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0311.png', 
+            src: 'https://lh3.googleusercontent.com/d/1MEDlVQIK8ntJXN1Gxbqw9Q4fmK0S0e4t', 
             category: 'photo', 
             caption: 'Temple',
             type: 'image'
         },
         { 
-            src: 'https://archive.org/download/wb2-0296/DJI_0296.png', 
+            src: 'https://lh3.googleusercontent.com/d/1Kk9quq-AbN6vVwiWTyCWEwpL0ATkf1Vf', 
             category: 'photo', 
-            caption: 'Temple',
+            caption: 'Coast',
             type: 'image'
         },
         { 
