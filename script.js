@@ -159,54 +159,100 @@ function initHero() {
 function initGallery() {
     const galleryGrid = document.querySelector('.gallery-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const viewMoreBtn = document.querySelector('#view-more-btn');
+    let showingAll = false;
+    let currentFilteredItems = [];
     
     // Sample gallery items (replace with your actual data)
     const galleryItems = [
-        { 
-            src: 'images/photo1.jpg', 
-            category: 'photo', 
+        {
+            src: 'images/photo1.jpg',
+            category: 'photo',
             caption: 'Mountain Landscape - 2023',
             type: 'image'
         },
-        { 
-            src: 'https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4', 
-            category: 'video', 
+        {
+            src: 'https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4',
+            category: 'video',
             caption: 'Chalk Horse',
             type: 'video',
             thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
         },
-        { 
-            src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0317.png', 
-            category: 'image', 
+        {
+            src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0317.png',
+            category: 'image',
             caption: 'Temple',
             type: 'image'
         },
-        { 
-            src: 'https://lh3.googleusercontent.com/d/1MEDlVQIK8ntJXN1Gxbqw9Q4fmK0S0e4t', 
-            category: 'photo', 
+        {
+            src: 'https://lh3.googleusercontent.com/d/1MEDlVQIK8ntJXN1Gxbqw9Q4fmK0S0e4t',
+            category: 'photo',
             caption: 'Temple',
             type: 'image'
         },
-        { 
-            src: 'https://lh3.googleusercontent.com/d/1Kk9quq-AbN6vVwiWTyCWEwpL0ATkf1Vf', 
-            category: 'photo', 
+        {
+            src: 'https://lh3.googleusercontent.com/d/1Kk9quq-AbN6vVwiWTyCWEwpL0ATkf1Vf',
+            category: 'photo',
             caption: 'Coast',
             type: 'image'
         },
-        { 
-            src: 'https://ia601205.us.archive.org/13/items/0505_20250505_20250505/0505.mp4', 
-            category: 'video', 
+        {
+            src: 'https://ia601205.us.archive.org/13/items/0505_20250505_20250505/0505.mp4',
+            category: 'video',
             caption: 'Temple',
             type: 'video',
             thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
+        },
+        {
+            src: 'https://lh3.googleusercontent.com/d/1rn9agTGPCUsY3ffemDkj_z8hvx22gj11',
+            category: 'photo',
+            caption: 'Uffington Castle',
+            type: 'image'
+        },
+        {
+            src: 'https://lh3.googleusercontent.com/d/1oL-9UZZSReYd29v6-HfGlmzNyjV5Zigg',
+            category: 'photo',
+            caption: 'Countryside',
+            type: 'image'
+        },
+        {
+            src: 'https://lh3.googleusercontent.com/d/1MEDlVQIK8ntJXN1Gxbqw9Q4fmK0S0e4t',
+            category: 'photo',
+            caption: 'Countryside',
+            type: 'image'
+        },
+        {
+            src: 'https://lh3.googleusercontent.com/d/1NRkTAA1dadthHB8cFJqNV8JRSsmh8sFb',
+            category: 'photo',
+            caption: 'Scottish coast',
+            type: 'image'
+        },
+        {
+            src: 'https://lh3.googleusercontent.com/d/1qZZ_jgodaYhPJPr01e_UcF4N399FY1nv',
+            category: 'photo',
+            caption: 'Bangkok Skyline',
+            type: 'image'
         }
     ];
     
-    // Render gallery items
-    function renderGallery(items) {
+    // Render gallery items (if limited=true show up to 6 items)
+    // Items can include an optional numeric `priority` field where 1 = highest priority.
+    // Items with lower priority values appear before higher ones. Items without a priority
+    // are treated as lowest priority.
+    function renderGallery(items, limited = false) {
         galleryGrid.innerHTML = '';
-        
-        items.forEach(item => {
+
+        // Sort by priority (ascending). Treat missing/non-numeric priority as very large.
+        const sortedItems = items.slice().sort((a, b) => {
+            const pa = (typeof a.priority === 'number') ? a.priority : 9999;
+            const pb = (typeof b.priority === 'number') ? b.priority : 9999;
+            if (pa === pb) return 0;
+            return pa - pb;
+        });
+
+        const displayItems = (limited && sortedItems.length > 6) ? sortedItems.slice(0, 6) : sortedItems;
+
+        displayItems.forEach(item => {
             const galleryItem = document.createElement('div');
             galleryItem.className = `gallery-item ${item.category}`;
             galleryItem.dataset.category = item.category;
@@ -263,6 +309,17 @@ function initGallery() {
             
             galleryGrid.appendChild(galleryItem);
         });
+
+        // Show or hide view-more button depending on total items
+        if (viewMoreBtn) {
+            if (items.length > 6) {
+                viewMoreBtn.style.display = 'inline-flex';
+                viewMoreBtn.setAttribute('aria-expanded', showingAll ? 'true' : 'false');
+                viewMoreBtn.textContent = showingAll ? 'View Less' : 'View More';
+            } else {
+                viewMoreBtn.style.display = 'none';
+            }
+        }
     }
     
     // Filter gallery
@@ -270,18 +327,27 @@ function initGallery() {
         btn.addEventListener('click', function() {
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            
+
             const filter = this.dataset.filter;
-            const itemsToShow = filter === 'all' 
-                ? galleryItems 
-                : galleryItems.filter(item => item.category === filter);
-                
-            renderGallery(itemsToShow);
+            currentFilteredItems = filter === 'all' ? galleryItems : galleryItems.filter(item => item.category === filter);
+            // Reset to limited view when changing filters
+            showingAll = false;
+            renderGallery(currentFilteredItems, true);
         });
     });
     
-    // Initial render
-    renderGallery(galleryItems);
+    // Initial render (show limited set)
+    currentFilteredItems = galleryItems;
+    renderGallery(currentFilteredItems, true);
+
+    // View more/less toggle
+    if (viewMoreBtn) {
+        viewMoreBtn.addEventListener('click', function() {
+            showingAll = !showingAll;
+            this.setAttribute('aria-expanded', showingAll ? 'true' : 'false');
+            renderGallery(currentFilteredItems, !showingAll);
+        });
+    }
 }
 
 // Lightbox
