@@ -166,26 +166,26 @@ function initGallery() {
     // Sample gallery items (replace with your actual data)
     const galleryItems = [
         {
-            src: 'images/photo1.jpg',
-            category: 'photo',
-            caption: 'Mountain Landscape - 2023',
+            src: 'https://lh3.googleusercontent.com/d/132NFYG6BvFY8foy_OofHj0cnwyo3hpbt',
+            category: 'Image',
+            caption: 'Mountain Landscape - 2025',
             type: 'image'
         },
         {
             src: 'https://ia801502.us.archive.org/24/items/0333_20250505/0333.mp4',
             category: 'video',
-            caption: 'Chalk Horse',
+            caption: 'Chalk Horse - 2024',
             type: 'video',
-            thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
+            thumbnail: 'https://lh3.googleusercontent.com/d/1hIFDmfV2TrZK6j2ENrT4Y7xlYuLsVRl2'
         },
         {
             src: 'https://archive.org/download/httpsarchive.orgdownloadwb2-0296dji_0296.png/DJI_0317.png',
             category: 'image',
-            caption: 'Temple',
+            caption: 'Temple - 2024',
             type: 'image'
         },
         {
-            src: 'https://lh3.googleusercontent.com/d/1MEDlVQIK8ntJXN1Gxbqw9Q4fmK0S0e4t',
+            src: '',
             category: 'photo',
             caption: 'Temple',
             type: 'image'
@@ -193,7 +193,7 @@ function initGallery() {
         {
             src: 'https://lh3.googleusercontent.com/d/1Kk9quq-AbN6vVwiWTyCWEwpL0ATkf1Vf',
             category: 'photo',
-            caption: 'Coast',
+            caption: 'Coast - 2025',
             type: 'image'
         },
         {
@@ -201,7 +201,7 @@ function initGallery() {
             category: 'video',
             caption: 'Temple',
             type: 'video',
-            thumbnail: 'https://archive.org/download/zq-ks-bu-c/ZqKsBuC.png'
+            thumbnail: 'https://lh3.googleusercontent.com/d/1b3TKmvPvk9O-o4FxqIPco6hWTi-t4K07'
         },
         {
             src: 'https://lh3.googleusercontent.com/d/1rn9agTGPCUsY3ffemDkj_z8hvx22gj11',
@@ -267,7 +267,6 @@ function initGallery() {
                         </div>
                         <div class="video-overlay">
                             <div class="overlay-label">Hover to play</div>
-                            <div class="overlay-caption">${item.caption}</div>
                         </div>
                     </div>
                 `;
