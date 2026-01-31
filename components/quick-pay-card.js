@@ -126,17 +126,14 @@ class QuickPayCard extends HTMLElement {
                 
                 <div class="text-center mb-8 relative z-10">
                     <h2 class="text-2xl font-bold mb-2">Quick Pay</h2>
-                    <p class="text-gray-400 text-sm">Instant digital wallet checkout</p>
+                    <p class="text-gray-400 text-sm">Pay instantly with a debit card or Apple Pay/Google Pay</p>
                 </div>
                 
                 <button class="pay-button" id="mainPayBtn" aria-label="Pay with Apple Pay or Google Pay">
                     <svg class="shield-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
-                    <span>Pay with</span>
-                    <span style="font-weight: 500;">Apple Pay</span>
-                    <span style="opacity: 0.7;">/</span>
-                    <span style="font-weight: 500;">Google Pay</span>
+                    <span>Pay now</span>
                 </button>
                 
                 <div class="security-note">
