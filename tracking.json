@@ -21,7 +21,7 @@
                     {
                         "title": "Draft Gallery Ready",
                         "status": "current",
-                        "date": "2026-03-01T16:45:00Z",
+                        "date": "2026-03-01T10:15:00Z",
                         "description": "Your preview gallery is ready for review.",
                         "icon": "eye",
                         "url": "https://dylanalcoy.co.uk/village-barbers-jane",
@@ -30,7 +30,7 @@
                     {
                         "title": "Video Editing",
                         "status": "pending",
-                        "date": "2026-03-01T16:45:00Z",
+                        "date": null,
                         "description": "We're carefully selecting the best shots and colour grading them to perfection.",
                         "icon": "clapperboard"
                     }
