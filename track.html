@@ -116,7 +116,7 @@
                 Track Your Photos
             </h2>
             <p class="text-neutral-400 text-lg mb-8 max-w-md mx-auto">
-                Enter your unique tracking code to view the real-time status of your photography session.
+                Enter your unique tracking code to view the real-time status of your shoot.
             </p>
 
             <div class="search-glow rounded-2xl transition-all duration-300">
@@ -237,46 +237,6 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Sample data for demonstration (in production, this would be fetched from tracking.json)
-        const sampleData = [
-            {
-                "code": "JANE01",
-                "clientName": "Jane - Sunninghill Village Barbers",
-                "currentStatus": "First Hero Image Pack Completed",
-                "steps": [
-                    {
-                        "title": "Shoot Completed",
-                        "status": "completed",
-                        "date": "2026-02-28T12:30:00Z",
-                        "description": "Your session has been completed successfully.",
-                        "icon": "camera"
-                    },
-                    {
-                        "title": "Photo Editing in Progress",
-                        "status": "completed",
-                        "date": "2026-03-01T10:15:00Z",
-                        "description": "We're carefully selecting the best shots from your 1400+ captured images.",
-                        "icon": "image"
-                    },
-                    {
-                        "title": "Draft Gallery Ready",
-                        "status": "current",
-                        "date": "2024-01-18T16:45:00Z",
-                        "description": "Your preview gallery is ready for review.",
-                        "icon": "eye",
-                        "url": "https://dylanalcoy.co.uk/village-barbers-jane",
-                        "urlLabel": "View Gallery"
-                    },
-                    {
-                        "title": "Video Editing",
-                        "status": "pending",
-                        "date": null,
-                        "description": "We're carefully selecting the best shots and colour grading them to perfection.",
-                        "icon": "clapperboard"
-                    }
-                ]
-            }
-        ];
 
         let trackingData = [];
 
