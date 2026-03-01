@@ -262,7 +262,7 @@
                 // Try to fetch from tracking.json first
                 let data = [];
                 try {
-                    const response = await fetch('tracking.json');
+                    const response = await fetch(`tracking.json?v=${new Date().getTime()}`);
                     if (response.ok) {
                         data = await response.json();
                     }
