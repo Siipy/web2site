@@ -29,10 +29,33 @@
                     },
                     {
                         "title": "Video Editing",
-                        "status": "pending",
-                        "date": null,
+                        "status": "complete",
+                        "date": "2026-03-01T10:15:00Z",
                         "description": "We're carefully selecting the best shots and colour grading them to perfection.",
                         "icon": "clapperboard"
+                    },
+                    {
+                        "title": "Draft Edit Ready",
+                        "status": "current",
+                        "date": "2026-03-01T10:15:00Z",
+                        "description": "Your preview edit (Rose) is ready for review.",
+                        "icon": "eye",
+                        "url": "https://villagebarbers.s3.eu-north-1.amazonaws.com/Rose-Edit/Rose-VillageBarbers.mp4",
+                        "urlLabel": "View Edit"
+                    },
+                    {
+                        "title": "Video Editing",
+                        "status": "pending",
+                        "date": "null",
+                        "description": "We're carefully selecting the best shots and colour grading them to perfection.",
+                        "icon": "clapperboard"
+                    },
+                    {
+                        "title": "Photo Editing in Progress",
+                        "status": "pending",
+                        "date": "null",
+                        "description": "We're carefully selecting the best shots from your 1400+ captured images.",
+                        "icon": "image"
                     }
                 ]
             }
