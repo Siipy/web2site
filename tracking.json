@@ -46,14 +46,14 @@
                     {
                         "title": "Video Editing",
                         "status": "pending",
-                        "date": "null",
+                        "date": null,
                         "description": "We're carefully selecting the best shots and colour grading them to perfection.",
                         "icon": "clapperboard"
                     },
                     {
                         "title": "Photo Editing in Progress",
                         "status": "pending",
-                        "date": "null",
+                        "date": null,
                         "description": "We're carefully selecting the best shots from your 1400+ captured images.",
                         "icon": "image"
                     }
