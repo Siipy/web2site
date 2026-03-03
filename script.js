@@ -187,9 +187,9 @@ function initGallery() {
             type: 'image'
         },
         {
-            src: '',
+            src: 'https://villagebarbers.s3.eu-north-1.amazonaws.com/Initial-Photo-Gallery-WM5mb/VillageB-WM-8.JPG',
             category: 'photo',
-            caption: 'Temple',
+            caption: 'Sunninghill Village Barbers - 2026',
             type: 'image'
         },
         {
